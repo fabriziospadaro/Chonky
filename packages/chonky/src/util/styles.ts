@@ -1,5 +1,6 @@
-import { Theme as MuiTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Theme as MuiTheme } from '@mui/material/styles';
+
+import { useMediaQuery } from '@mui/material';
 import classnames from 'classnames';
 import { createUseStyles } from 'react-jss';
 import { DeepPartial } from 'tsdef';
@@ -145,6 +146,7 @@ export const makeGlobalChonkyStyles = <C extends string = string>(
     // @ts-ignore
     const useStyles = createUseStyles<ChonkyTheme, C>(makeGlobalStyles as any);
     return (...args: any[]): any => {
+        // @ts-ignore
         const styles = useStyles(...args);
         const classes = {};
         Object.keys(selectorMapping).map(localSelector => {

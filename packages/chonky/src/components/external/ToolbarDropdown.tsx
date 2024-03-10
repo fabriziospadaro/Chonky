@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-import Menu from '@material-ui/core/Menu';
 import React, { useCallback, useMemo } from 'react';
 
 import { FileActionGroup } from '../../types/action-menus.types';
@@ -12,6 +11,7 @@ import { useLocalizedFileActionGroup } from '../../util/i18n';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
 import { ToolbarButton } from './ToolbarButton';
 import { SmartToolbarDropdownButton } from './ToolbarDropdownButton';
+import { Menu } from '@mui/material';
 
 export type ToolbarDropdownProps = FileActionGroup;
 

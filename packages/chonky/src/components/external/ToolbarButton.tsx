@@ -4,7 +4,6 @@
  * @license MIT
  */
 
-import Button from '@material-ui/core/Button';
 import React, { useContext } from 'react';
 import { Nullable } from 'tsdef';
 
@@ -16,6 +15,7 @@ import { useFileActionProps, useFileActionTrigger } from '../../util/file-action
 import { useLocalizedFileActionStrings } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
 import { c, important, makeGlobalChonkyStyles } from '../../util/styles';
+import { Button } from '@mui/material';
 
 export interface ToolbarButtonProps {
     className?: string;

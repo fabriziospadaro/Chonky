@@ -1,13 +1,9 @@
-import {
-    createMuiTheme,
-    ThemeProvider as MuiThemeProvider,
-} from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import merge from 'deepmerge';
 import React, { ReactNode, useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { IntlProvider } from 'react-intl';
-import { ThemeProvider } from 'react-jss';
 import { Provider as ReduxProvider } from 'react-redux';
 import shortid from 'shortid';
 
@@ -27,13 +23,6 @@ import {
 import { ChonkyBusinessLogic } from '../internal/ChonkyBusinessLogic';
 import { ChonkyIconPlaceholder } from '../internal/ChonkyIconPlaceholder';
 import { ChonkyPresentationLayer } from '../internal/ChonkyPresentationLayer';
-
-// if (process.env.NODE_ENV === 'development') {
-//     const whyDidYouRender = require('@welldone-software/why-did-you-render');
-//     whyDidYouRender(React, {
-//         trackAllPureComponents: true,
-//     });
-// }
 
 export const FileBrowser = React.forwardRef<
     FileBrowserHandle,
@@ -65,16 +54,11 @@ export const FileBrowser = React.forwardRef<
 
     const isMobileBreakpoint = useIsMobileBreakpoint();
     const theme = useMemo(() => {
-        const muiTheme = createMuiTheme({
-            palette: { type: darkMode ? 'dark' : 'light' },
+        let baseTheme = createTheme({
+            palette: { mode: darkMode ? 'dark' : 'light' },
         });
-        const combinedTheme = merge(
-            muiTheme,
-            merge(lightTheme, darkMode ? darkThemeOverride : {})
-        );
-        return isMobileBreakpoint
-            ? merge(combinedTheme, mobileThemeOverride)
-            : combinedTheme;
+        baseTheme = merge(baseTheme, darkMode ? darkThemeOverride : lightTheme);
+        return isMobileBreakpoint ? merge(baseTheme, mobileThemeOverride) : baseTheme;
     }, [darkMode, isMobileBreakpoint]);
 
     const chonkyComps = (
@@ -89,23 +73,21 @@ export const FileBrowser = React.forwardRef<
             <ChonkyFormattersContext.Provider value={formatters}>
                 <ReduxProvider store={store}>
                     <ThemeProvider theme={theme}>
-                        <MuiThemeProvider theme={theme}>
-                            <ChonkyIconContext.Provider
-                                value={
-                                    iconComponent ??
-                                    defaultConfig.iconComponent ??
-                                    ChonkyIconPlaceholder
-                                }
-                            >
-                                {disableDragAndDrop || disableDragAndDropProvider ? (
-                                    chonkyComps
-                                ) : (
-                                    <DndProvider backend={HTML5Backend}>
-                                        {chonkyComps}
-                                    </DndProvider>
-                                )}
-                            </ChonkyIconContext.Provider>
-                        </MuiThemeProvider>
+                        <ChonkyIconContext.Provider
+                            value={
+                                iconComponent ??
+                                defaultConfig.iconComponent ??
+                                ChonkyIconPlaceholder
+                            }
+                        >
+                            {disableDragAndDrop || disableDragAndDropProvider ? (
+                                chonkyComps
+                            ) : (
+                                <DndProvider backend={HTML5Backend}>
+                                    {chonkyComps}
+                                </DndProvider>
+                            )}
+                        </ChonkyIconContext.Provider>
                     </ThemeProvider>
                 </ReduxProvider>
             </ChonkyFormattersContext.Provider>

@@ -8,11 +8,10 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
-import Typography from '@material-ui/core/Typography';
-
 import { selectHiddenFileCount, selectors, selectSelectionSize } from '../../redux/selectors';
 import { getI18nId, I18nNamespace } from '../../util/i18n';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
+import { Typography } from '@mui/material';
 
 export interface ToolbarInfoProps {}
 

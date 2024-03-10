@@ -8,9 +8,6 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
-
 import { reduxActions } from '../../redux/reducers';
 import { selectSearchString } from '../../redux/selectors';
 import { ChonkyIconName } from '../../types/icons.types';
@@ -18,6 +15,7 @@ import { useDebounce } from '../../util/hooks-helpers';
 import { getI18nId, I18nNamespace } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
 import { important, makeGlobalChonkyStyles } from '../../util/styles';
+import { InputAdornment, TextField } from '@mui/material';
 
 export interface ToolbarSearchProps {}
 

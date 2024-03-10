@@ -4,9 +4,6 @@
  * @license MIT
  */
 
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
 import React, { useCallback, useContext } from 'react';
 import { Nullable } from 'tsdef';
 
@@ -18,6 +15,7 @@ import { useFileActionProps, useFileActionTrigger } from '../../util/file-action
 import { useLocalizedFileActionStrings } from '../../util/i18n';
 import { ChonkyIconContext } from '../../util/icon-helper';
 import { c, important, makeGlobalChonkyStyles } from '../../util/styles';
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material';
 
 export interface ToolbarDropdownButtonProps {
     text: string;

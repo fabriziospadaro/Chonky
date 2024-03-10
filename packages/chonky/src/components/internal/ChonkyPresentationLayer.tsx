@@ -4,8 +4,6 @@
  * @license MIT
  */
 
-import Box from '@material-ui/core/Box';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,6 +19,7 @@ import { makeGlobalChonkyStyles } from '../../util/styles';
 import { useContextMenuTrigger } from '../external/FileContextMenu-hooks';
 import { DnDFileListDragLayer } from '../file-list/DnDFileListDragLayer';
 import { HotkeyListener } from './HotkeyListener';
+import { Box, ClickAwayListener } from '@mui/material';
 
 export interface ChonkyPresentationLayerProps {}
 
@@ -36,8 +35,9 @@ export const ChonkyPresentationLayer: React.FC<ChonkyPresentationLayerProps> = (
 
     // Deal with clicks outside of Chonky
     const handleClickAway = useCallback(
-        (event: React.MouseEvent<Document>) => {
-            if (!clearSelectionOnOutsideClick || elementIsInsideButton(event.target)) {
+        (event: MouseEvent | TouchEvent) => {
+            const target = event.target as HTMLElement; // Cast the event target to HTMLElement
+            if (!clearSelectionOnOutsideClick || elementIsInsideButton(target)) {
                 // We only clear out the selection on outside click if the click target
                 // was not a button. We don't want to clear out the selection when a
                 // button is clicked because Chonky users might want to trigger some
